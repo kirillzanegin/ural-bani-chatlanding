@@ -1,7 +1,10 @@
-export default function Header() {
+export default function Header({ legal = false }) {
   return (
     <header className="header">
-      <a className="logo" href="./">Бани Урала</a>
+      <a className="logo" href="./">Строим уютные бани</a>
+      {legal && (
+        <a className="legal-return" href="./">Вернуться на основную страницу</a>
+      )}
       <nav className="nav">
         <a href="#formats">Форматы</a>
         <a href="#layouts">Планировки</a>
