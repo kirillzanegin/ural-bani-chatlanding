@@ -65,6 +65,13 @@ export default function ArticlePage({ slug }) {
   const previousItem = currentIndex > 0 ? knowledgeItems[currentIndex - 1] : null
   const nextItem = currentIndex >= 0 && currentIndex < knowledgeItems.length - 1 ? knowledgeItems[currentIndex + 1] : null
 
+  function scrollToSection(sectionId) {
+    const target = document.getElementById(sectionId)
+    if (target) {
+      target.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }
+  }
+
   return (
     <>
       <Header />
@@ -93,7 +100,9 @@ export default function ArticlePage({ slug }) {
               <aside className="article-toc">
                 <strong>В статье</strong>
                 {article.sections.map((section) => (
-                  <a href={'#' + section.id} key={section.id}>{section.title}</a>
+                  <button className="article-toc-link" type="button" key={section.id} onClick={() => scrollToSection(section.id)}>
+                    {section.title}
+                  </button>
                 ))}
               </aside>
 
