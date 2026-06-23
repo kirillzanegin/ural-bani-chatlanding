@@ -1,3 +1,5 @@
+import Header from '../components/Header.jsx'
+
 const documents = {
   privacy: {
     title: 'Политика обработки персональных данных',
@@ -150,9 +152,7 @@ export default function LegalPage({ type }) {
 
   return (
     <>
-      <header className="legal-topbar">
-        <a className="legal-back" href="./">← Вернуться на сайт</a>
-      </header>
+      <Header legal />
       <main className="legal-page">
         <article className="legal-document">
           <h1>{document.title}</h1>
