@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Home from './pages/Home.jsx'
 import Thanks from './pages/Thanks.jsx'
 import LegalPage from './pages/LegalPage.jsx'
+import './quiz-legal.css'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
