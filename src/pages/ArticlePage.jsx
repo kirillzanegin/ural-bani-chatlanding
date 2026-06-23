@@ -1,7 +1,14 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import { articles, getArticleBySlug } from '../data/articles.js'
+import { articles } from '../data/articles.js'
+import { extraArticles } from '../data/extraArticles.js'
 import { knowledgeItems } from '../data/knowledge.js'
+
+const allArticles = [...articles, ...extraArticles]
+
+function getArticleBySlug(slug) {
+  return allArticles.find((article) => article.slug === slug)
+}
 
 function ArticleCards({ cards }) {
   if (!cards) return null
@@ -60,7 +67,7 @@ function ArticleChecklist({ items }) {
 }
 
 export default function ArticlePage({ slug }) {
-  const article = getArticleBySlug(slug) || articles[0]
+  const article = getArticleBySlug(slug) || allArticles[0]
   const currentIndex = knowledgeItems.findIndex((item) => item.slug === article.slug)
   const previousItem = currentIndex > 0 ? knowledgeItems[currentIndex - 1] : null
   const nextItem = currentIndex >= 0 && currentIndex < knowledgeItems.length - 1 ? knowledgeItems[currentIndex + 1] : null
@@ -90,7 +97,7 @@ export default function ArticlePage({ slug }) {
               </div>
               <div className="article-summary-card">
                 <h2>Коротко</h2>
-                <p>Сначала выбираем сценарий использования, потом площадь и состав помещений. После этого проверяем участок, инженерию и только затем сравниваем стоимость.</p>
+                <p>{article.summary || 'Сначала выбираем сценарий использования, потом площадь и состав помещений. После этого проверяем участок, инженерию и только затем сравниваем стоимость.'}</p>
               </div>
             </div>
           </section>
