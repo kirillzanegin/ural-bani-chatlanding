@@ -149,25 +149,27 @@ export default function LegalPage({ type }) {
   const document = documents[type] || documents.privacy
 
   return (
-    <main className="legal-page">
-      <article className="legal-document">
-        <a className="text-link" href="./">← Вернуться на сайт</a>
-        <p className="eyebrow">Документы сайта</p>
-        <h1>{document.title}</h1>
-        <p className="legal-subtitle">{document.subtitle}</p>
-        <p className="legal-updated">Рабочая редакция для проверки</p>
-        {document.sections.map(([title, paragraphs]) => (
-          <section className="legal-section" key={title}>
-            <h2>{title}</h2>
-            {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </section>
-        ))}
-        <div className="legal-links">
-          <a href="#privacy">Политика обработки персональных данных</a>
-          <a href="#personal-data-consent">Согласие на обработку персональных данных</a>
-          <a href="#cookies">Политика использования cookies</a>
-        </div>
-      </article>
-    </main>
+    <>
+      <header className="legal-topbar">
+        <a className="legal-back" href="./">← Вернуться на сайт</a>
+      </header>
+      <main className="legal-page">
+        <article className="legal-document">
+          <h1>{document.title}</h1>
+          <p className="legal-subtitle">{document.subtitle}</p>
+          {document.sections.map(([title, paragraphs]) => (
+            <section className="legal-section" key={title}>
+              <h2>{title}</h2>
+              {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </section>
+          ))}
+          <div className="legal-links">
+            <a href="#privacy">Политика обработки персональных данных</a>
+            <a href="#personal-data-consent">Согласие на обработку персональных данных</a>
+            <a href="#cookies">Политика использования cookies</a>
+          </div>
+        </article>
+      </main>
+    </>
   )
 }
