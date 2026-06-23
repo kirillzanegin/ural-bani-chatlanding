@@ -69,6 +69,6 @@ export const knowledgeItems = [
     title: 'Как подготовить участок к строительству бани',
     slug: 'kak-podgotovit-uchastok-k-stroitelstvu-bani',
     description: 'Подъезд, место монтажа, уклон, вода, электричество, канализация и бытовые нюансы.',
-    isReady: false,
+    isReady: true,
   },
 ]
