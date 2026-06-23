@@ -15,6 +15,27 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
+  useEffect(() => {
+    window.setTimeout(() => {
+      if (hash.startsWith('#article/')) {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+        return
+      }
+
+      if (['#thanks', '#privacy', '#personal-data-consent', '#cookies'].includes(hash)) {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+        return
+      }
+
+      const id = hash.replace('#', '')
+      const target = id ? document.getElementById(id) : null
+
+      if (target) {
+        target.scrollIntoView({ block: 'start', behavior: 'auto' })
+      }
+    }, 0)
+  }, [hash])
+
   if (hash === '#thanks') return <Thanks />
   if (hash === '#privacy') return <LegalPage type="privacy" />
   if (hash === '#personal-data-consent') return <LegalPage type="personal-data-consent" />
