@@ -1,0 +1,134 @@
+.custom-answer {
+  margin-top: 14px;
+}
+
+.consent-check {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  margin: 18px 0 6px;
+  padding: 16px;
+  border: 1px solid rgba(31, 35, 38, 0.12);
+  border-radius: 18px;
+  color: var(--graphite);
+  background: rgba(243, 232, 213, 0.42);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.consent-check input {
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--copper);
+}
+
+.consent-check a {
+  color: var(--copper);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 28px;
+}
+
+.footer-brand,
+.footer-legal {
+  display: grid;
+  gap: 10px;
+}
+
+.footer-legal {
+  grid-column: 4;
+  justify-items: start;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.footer-legal a:hover {
+  color: var(--white);
+}
+
+.legal-page {
+  min-height: 100vh;
+  padding: 48px 16px;
+  background: var(--warm-light);
+}
+
+.legal-document {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 56px);
+  border-radius: 30px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.legal-document h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.legal-subtitle,
+.legal-updated {
+  color: var(--muted);
+}
+
+.legal-section {
+  margin-top: 32px;
+}
+
+.legal-section h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.legal-section p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.legal-links {
+  display: grid;
+  gap: 10px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.legal-links a {
+  color: var(--copper);
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .consent-check {
+    grid-template-columns: 20px minmax(0, 1fr);
+    padding: 14px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-legal {
+    grid-column: auto;
+  }
+
+  .footer-empty {
+    display: none;
+  }
+}
