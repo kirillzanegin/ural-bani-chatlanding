@@ -5,7 +5,7 @@ export default function FinalCTA() {
         <p className="eyebrow">Предварительный расчёт</p>
         <h2>Подберём планировку и рассчитаем стоимость вашей бани</h2>
         <p>Оставьте заявку — менеджер уточнит площадь, помещения, комплектацию и подготовит предварительный расчёт.</p>
-        <a className="button button-primary" href="#quiz">Рассчитать баню</a>
+        <a className="button button-primary" href="#feedback">Рассчитать баню</a>
       </div>
     </section>
   )
