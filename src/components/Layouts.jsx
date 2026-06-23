@@ -15,7 +15,7 @@ export default function Layouts() {
               <div className="scheme-placeholder">{layout}</div>
               <h3>Планировка {layout}</h3>
               <p>Здесь будет схема сверху, состав помещений и пояснение, кому подходит этот формат.</p>
-              <a className="button button-ghost" href="#quiz">Рассчитать по этой планировке</a>
+              <a className="button button-ghost" href="#feedback">Рассчитать по этой планировке</a>
             </article>
           ))}
         </div>
