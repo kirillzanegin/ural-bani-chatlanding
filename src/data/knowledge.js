@@ -45,13 +45,13 @@ export const knowledgeItems = [
     title: 'Нужна ли помывочная в бане',
     slug: 'nuzhna-li-pomyvochnaya-v-bane',
     description: 'Почему помывочная влияет на комфорт, влагу, вентиляцию и планировку.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Панорамное окно в бане: красиво или непрактично',
     slug: 'panoramnoe-okno-v-bane',
     description: 'Теплопотери, приватность, вид с участка и правильное расположение окна.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Что такое второй свет в бане',
