@@ -4,9 +4,10 @@ import { articles } from '../data/articles.js'
 import { extraArticles } from '../data/extraArticles.js'
 import { moreArticles } from '../data/moreArticles.js'
 import { comfortArticles } from '../data/comfortArticles.js'
+import { spaceArticles } from '../data/spaceArticles.js'
 import { knowledgeItems } from '../data/knowledge.js'
 
-const allArticles = [...articles, ...extraArticles, ...moreArticles, ...comfortArticles]
+const allArticles = [...articles, ...extraArticles, ...moreArticles, ...comfortArticles, ...spaceArticles]
 
 function getArticleBySlug(slug) {
   return allArticles.find((article) => article.slug === slug)
