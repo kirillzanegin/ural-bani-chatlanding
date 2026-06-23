@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="hero-overlay" />
       <div className="container hero-content">
         <p className="eyebrow">Строим качественные бани под ключ</p>
-        <h1>Баня на ваш вкус</h1>
+        <h1>А какой баней вы мечтаете?</h1>
         <p className="hero-subtitle">
           Берем на себя ответственность за все процессы от проектирования до установки мебели.
         </p>
