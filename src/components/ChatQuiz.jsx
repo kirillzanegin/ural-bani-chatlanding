@@ -84,7 +84,7 @@ export default function ChatQuiz() {
               <p>Спасибо. Менеджер уточнит детали и подготовит предварительный расчёт.</p>
             </div>
           ) : isContactStep ? (
-            <form onSubmit={submitForm}>
+            <form onSubmit={submitForm} noValidate>
               <h3>Куда отправить предварительный расчёт?</h3>
               <label>
                 Имя
@@ -100,7 +100,6 @@ export default function ChatQuiz() {
                   value={contact.phone}
                   onChange={(event) => setContact({ ...contact, phone: event.target.value })}
                   placeholder="+7"
-                  required
                 />
               </label>
               <label>
@@ -116,11 +115,10 @@ export default function ChatQuiz() {
                   type="checkbox"
                   checked={contact.consent}
                   onChange={(event) => setContact({ ...contact, consent: event.target.checked })}
-                  required
                 />
                 <span>
-                  Я согласен на обработку персональных данных и ознакомлен с{' '}
-                  <a href="#personal-data-consent">согласием на обработку персональных данных</a>.
+                  Я согласен на обработку и хранение персональных данных.{' '}
+                  <a href="#personal-data-consent">Открыть согласие на обработку персональных данных</a>.
                 </span>
               </label>
               <div className="quiz-actions">
