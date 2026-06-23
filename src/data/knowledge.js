@@ -33,13 +33,13 @@ export const knowledgeItems = [
     title: 'Какой фундамент нужен для отдельно стоящей бани',
     slug: 'kakoy-fundament-nuzhen-dlya-bani',
     description: 'Что зависит от грунта, рельефа, веса бани, инженерии и сезонности.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Нужен ли санузел в бане',
     slug: 'nuzhen-li-sanuzel-v-bane',
     description: 'Когда санузел оправдан, а когда усложняет проект и инженерные решения.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Нужна ли помывочная в бане',
