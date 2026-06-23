@@ -4,7 +4,7 @@ import { quizSteps } from '../data/quiz.js'
 export default function ChatQuiz() {
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState({})
-  const [contact, setContact] = useState({ name: '', phone: '', messenger: 'Telegram', comment: '' })
+  const [contact, setContact] = useState({ name: '', phone: '', comment: '', consent: false })
   const [submitted, setSubmitted] = useState(false)
 
   const step = quizSteps[stepIndex]
@@ -27,6 +27,11 @@ export default function ChatQuiz() {
     setAnswers({ ...answers, [step.id]: [option] })
   }
 
+  function setCustomAnswer(value) {
+    if (!step) return
+    setAnswers({ ...answers, [`${step.id}Custom`]: value })
+  }
+
   function goNext() {
     if (stepIndex < quizSteps.length) {
       setStepIndex(stepIndex + 1)
@@ -45,6 +50,11 @@ export default function ChatQuiz() {
       return
     }
 
+    if (!contact.consent) {
+      alert('Нужно согласие на обработку персональных данных')
+      return
+    }
+
     const lead = {
       ...answers,
       contact,
@@ -60,7 +70,7 @@ export default function ChatQuiz() {
     <section className="section section-warm" id="quiz">
       <div className="container two-column">
         <div>
-          <p className="eyebrow">Чат-подбор</p>
+          <p className="eyebrow">Расчёт сметы</p>
           <h2>Подберите формат бани за несколько шагов</h2>
           <p>
             Ответьте на короткие вопросы. Менеджер уточнит детали, комплектацию и подготовит индивидуальный расчёт под вашу площадь и задачи.
@@ -94,22 +104,24 @@ export default function ChatQuiz() {
                 />
               </label>
               <label>
-                Удобный мессенджер
-                <select
-                  value={contact.messenger}
-                  onChange={(event) => setContact({ ...contact, messenger: event.target.value })}
-                >
-                  <option>Telegram</option>
-                  <option>WhatsApp</option>
-                </select>
-              </label>
-              <label>
-                Комментарий
+                Комментарий, если хотите
                 <textarea
                   value={contact.comment}
                   onChange={(event) => setContact({ ...contact, comment: event.target.value })}
-                  placeholder="Если хотите что-то добавить"
+                  placeholder="Например: хочу баню с террасой, санузлом и комнатой отдыха"
                 />
+              </label>
+              <label className="consent-check">
+                <input
+                  type="checkbox"
+                  checked={contact.consent}
+                  onChange={(event) => setContact({ ...contact, consent: event.target.checked })}
+                  required
+                />
+                <span>
+                  Я согласен на обработку персональных данных и ознакомлен с{' '}
+                  <a href="#personal-data-consent">согласием на обработку персональных данных</a>.
+                </span>
               </label>
               <div className="quiz-actions">
                 <button className="button button-ghost" type="button" onClick={goBack}>Назад</button>
@@ -132,6 +144,16 @@ export default function ChatQuiz() {
                   </button>
                 ))}
               </div>
+              {step.customLabel && (
+                <label className="custom-answer">
+                  {step.customLabel}
+                  <input
+                    value={answers[`${step.id}Custom`] || ''}
+                    onChange={(event) => setCustomAnswer(event.target.value)}
+                    placeholder={step.customPlaceholder}
+                  />
+                </label>
+              )}
               <div className="quiz-actions">
                 {stepIndex > 0 && <button className="button button-ghost" type="button" onClick={goBack}>Назад</button>}
                 <button className="button button-primary" type="button" onClick={goNext}>
