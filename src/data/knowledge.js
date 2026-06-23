@@ -9,7 +9,7 @@ export const knowledgeItems = [
     title: 'Баня из бруса, готовый модуль или полноценное банное здание',
     slug: 'brus-modul-ili-polnocennoe-bannoe-zdanie',
     description: 'Сравнение технологий без рекламных крайностей: что выбрать под свои задачи.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Какая площадь бани нужна: 15, 20, 30, 40 или 60 м²',
