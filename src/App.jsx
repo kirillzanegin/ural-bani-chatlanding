@@ -1,8 +1,21 @@
+import { useEffect, useState } from 'react'
 import Home from './pages/Home.jsx'
 import Thanks from './pages/Thanks.jsx'
+import LegalPage from './pages/LegalPage.jsx'
 
 export default function App() {
-  const isThanks = window.location.hash === '#thanks'
+  const [hash, setHash] = useState(window.location.hash)
 
-  return isThanks ? <Thanks /> : <Home />
+  useEffect(() => {
+    const handleHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  if (hash === '#thanks') return <Thanks />
+  if (hash === '#privacy') return <LegalPage type="privacy" />
+  if (hash === '#personal-data-consent') return <LegalPage type="personal-data-consent" />
+  if (hash === '#cookies') return <LegalPage type="cookies" />
+
+  return <Home />
 }
