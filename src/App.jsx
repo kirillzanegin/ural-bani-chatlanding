@@ -5,6 +5,7 @@ import LegalPage from './pages/LegalPage.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import './quiz-legal.css'
 import './article.css'
+import './article-fixes.css'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
