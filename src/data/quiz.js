@@ -4,8 +4,8 @@ export const quizSteps = [
     title: 'Какая площадь бани вам интересна?',
     type: 'single',
     options: ['15 м²', '20 м²', '30 м²', '40 м²', '60 м²', 'пока не знаю, нужна консультация'],
-    customLabel: 'Указать свою площадь',
-    customPlaceholder: 'Например, 25',
+    customLabel: 'Укажите свою площадь',
+    customPlaceholder: 'Укажите свою площадь',
   },
   {
     id: 'rooms',
@@ -22,7 +22,7 @@ export const quizSteps = [
       'панорамное окно',
       'второй свет',
     ],
-    customLabel: 'Другое',
+    customLabel: 'Напишите, что ещё хотите предусмотреть',
     customPlaceholder: 'Напишите, что ещё хотите предусмотреть',
   },
   {
