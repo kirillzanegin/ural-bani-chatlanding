@@ -5,7 +5,6 @@ import BathFormats from '../components/BathFormats.jsx'
 import Included from '../components/Included.jsx'
 import RealProjects from '../components/RealProjects.jsx'
 import Layouts from '../components/Layouts.jsx'
-import CostFactors from '../components/CostFactors.jsx'
 import WorkSteps from '../components/WorkSteps.jsx'
 import KnowledgeBase from '../components/KnowledgeBase.jsx'
 import Reviews from '../components/Reviews.jsx'
@@ -24,7 +23,6 @@ export default function Home() {
         <Included />
         <RealProjects />
         <Layouts />
-        <CostFactors />
         <WorkSteps />
         <KnowledgeBase />
         <Reviews />
