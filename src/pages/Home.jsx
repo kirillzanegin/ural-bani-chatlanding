@@ -10,6 +10,7 @@ import KnowledgeBase from '../components/KnowledgeBase.jsx'
 import Reviews from '../components/Reviews.jsx'
 import FAQ from '../components/FAQ.jsx'
 import FinalCTA from '../components/FinalCTA.jsx'
+import FeedbackForm from '../components/FeedbackForm.jsx'
 import Footer from '../components/Footer.jsx'
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
         <Reviews />
         <FAQ />
         <FinalCTA />
+        <FeedbackForm />
       </main>
       <Footer />
     </>
