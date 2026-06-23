@@ -19,7 +19,7 @@ export default function BathFormats() {
                 {item.items.map((point) => <li key={point}>{point}</li>)}
               </ul>
               <strong>{item.price}</strong>
-              <a className="button button-primary" href="#quiz">Рассчитать такую баню</a>
+              <a className="button button-primary" href="#feedback">Рассчитать такую баню</a>
             </article>
           ))}
         </div>
