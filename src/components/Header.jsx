@@ -13,7 +13,7 @@ export default function Header({ legal = false }) {
         <a href="#cost">Стоимость</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a className="button button-small" href="#quiz">Рассчитать</a>
+      <a className="button button-small" href="#feedback">Рассчитать</a>
     </header>
   )
 }
