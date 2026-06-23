@@ -5,6 +5,8 @@ export default function ChatQuiz() {
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [contact, setContact] = useState({ name: '', phone: '', comment: '', consent: false })
+  const [errors, setErrors] = useState({})
+  const [validationAttempt, setValidationAttempt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
 
   const step = quizSteps[stepIndex]
@@ -32,6 +34,14 @@ export default function ChatQuiz() {
     setAnswers({ ...answers, [`${step.id}Custom`]: value })
   }
 
+  function updateContact(field, value) {
+    setContact({ ...contact, [field]: value })
+
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: false })
+    }
+  }
+
   function goNext() {
     if (stepIndex < quizSteps.length) {
       setStepIndex(stepIndex + 1)
@@ -45,13 +55,16 @@ export default function ChatQuiz() {
   function submitForm(event) {
     event.preventDefault()
 
-    if (!contact.phone.trim()) {
-      alert('Укажите телефон для связи')
-      return
+    const nextErrors = {
+      name: !contact.name.trim(),
+      phone: !contact.phone.trim(),
+      consent: !contact.consent,
     }
 
-    if (!contact.consent) {
-      alert('Нужно согласие на обработку персональных данных')
+    setErrors(nextErrors)
+
+    if (Object.values(nextErrors).some(Boolean)) {
+      setValidationAttempt((current) => current + 1)
       return
     }
 
@@ -65,6 +78,10 @@ export default function ChatQuiz() {
     setSubmitted(true)
     window.location.hash = 'thanks'
   }
+
+  const nameClass = errors.name ? 'field-error invalid-shake' : ''
+  const phoneClass = errors.phone ? 'field-error invalid-shake' : ''
+  const consentClass = errors.consent ? 'consent-check field-error invalid-shake' : 'consent-check'
 
   return (
     <section className="section section-warm" id="quiz">
@@ -86,19 +103,19 @@ export default function ChatQuiz() {
           ) : isContactStep ? (
             <form onSubmit={submitForm} noValidate>
               <h3>Куда отправить предварительный расчёт?</h3>
-              <label>
+              <label className={nameClass} key={`name-${validationAttempt}`}>
                 Имя
                 <input
                   value={contact.name}
-                  onChange={(event) => setContact({ ...contact, name: event.target.value })}
+                  onChange={(event) => updateContact('name', event.target.value)}
                   placeholder="Ваше имя"
                 />
               </label>
-              <label>
+              <label className={phoneClass} key={`phone-${validationAttempt}`}>
                 Телефон
                 <input
                   value={contact.phone}
-                  onChange={(event) => setContact({ ...contact, phone: event.target.value })}
+                  onChange={(event) => updateContact('phone', event.target.value)}
                   placeholder="+7"
                 />
               </label>
@@ -106,15 +123,15 @@ export default function ChatQuiz() {
                 Комментарий, если хотите
                 <textarea
                   value={contact.comment}
-                  onChange={(event) => setContact({ ...contact, comment: event.target.value })}
+                  onChange={(event) => updateContact('comment', event.target.value)}
                   placeholder="Например: хочу баню с террасой, санузлом и комнатой отдыха"
                 />
               </label>
-              <label className="consent-check">
+              <label className={consentClass} key={`consent-${validationAttempt}`}>
                 <input
                   type="checkbox"
                   checked={contact.consent}
-                  onChange={(event) => setContact({ ...contact, consent: event.target.checked })}
+                  onChange={(event) => updateContact('consent', event.target.checked)}
                 />
                 <span>
                   Я согласен на обработку и хранение персональных данных.{' '}
@@ -142,15 +159,15 @@ export default function ChatQuiz() {
                   </button>
                 ))}
               </div>
-              {step.customLabel && (
-                <label className="custom-answer">
-                  {step.customLabel}
+              {step.customPlaceholder && (
+                <div className="custom-answer">
                   <input
+                    aria-label={step.customPlaceholder}
                     value={answers[`${step.id}Custom`] || ''}
                     onChange={(event) => setCustomAnswer(event.target.value)}
                     placeholder={step.customPlaceholder}
                   />
-                </label>
+                </div>
               )}
               <div className="quiz-actions">
                 {stepIndex > 0 && <button className="button button-ghost" type="button" onClick={goBack}>Назад</button>}
