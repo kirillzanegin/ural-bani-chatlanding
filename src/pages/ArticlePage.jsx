@@ -2,9 +2,10 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import { articles } from '../data/articles.js'
 import { extraArticles } from '../data/extraArticles.js'
+import { moreArticles } from '../data/moreArticles.js'
 import { knowledgeItems } from '../data/knowledge.js'
 
-const allArticles = [...articles, ...extraArticles]
+const allArticles = [...articles, ...extraArticles, ...moreArticles]
 
 function getArticleBySlug(slug) {
   return allArticles.find((article) => article.slug === slug)
