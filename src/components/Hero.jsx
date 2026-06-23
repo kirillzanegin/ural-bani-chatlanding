@@ -27,7 +27,7 @@ export default function Hero() {
           <span>гарантия 3 года</span>
         </div>
         <div className="hero-actions">
-          <a className="button button-primary" href="#quiz">Рассчитать стоимость</a>
+          <a className="button button-primary" href="#feedback">Рассчитать стоимость</a>
           <a className="button button-ghost" href="#layouts">Посмотреть планировки</a>
         </div>
       </div>
