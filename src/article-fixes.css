@@ -1,0 +1,51 @@
+.knowledge-card-link {
+  display: block;
+  height: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.knowledge-card-link:hover {
+  transform: translateY(-3px);
+  border-color: rgba(184, 121, 58, 0.34);
+  box-shadow: 0 28px 80px rgba(31, 35, 38, 0.16);
+}
+
+.knowledge-card-link .text-link {
+  display: inline-flex;
+  margin-top: 12px;
+}
+
+.article-hero h1 {
+  max-width: 820px;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.02;
+}
+
+.article-section h2 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.article-final-checklist h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+}
+
+.article-toc-link {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.article-toc-link:hover {
+  color: var(--graphite);
+}
