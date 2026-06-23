@@ -1,40 +1,77 @@
-const included = [
-  'проектирование',
+import { useState } from 'react'
+
+const items = [
+  'площадь бани',
+  'планировка',
+  'состав помещений',
+  'парная',
+  'помывочная',
+  'комната отдыха',
+  'санузел',
+  'терраса',
+  'мини-кухня',
+  'спальня / гостевая',
+  'панорамные окна',
+  'второй свет',
   'фундамент',
+  'особенности участка',
+  'удалённость объекта',
+  'проектирование',
   'кровля',
   'утепление',
   'наружная отделка',
   'внутренняя отделка',
-  'парная',
-  'помывочная',
-  'комната отдыха',
   'печь',
   'дымоход',
   'электрика',
   'вентиляция',
   'водоснабжение',
   'канализация',
-  'санузел',
   'мебель и внутреннее наполнение',
   'доставка и монтаж',
 ]
 
 export default function Included() {
+  const [selected, setSelected] = useState([])
+
+  function toggleItem(item) {
+    setSelected((current) => (
+      current.includes(item)
+        ? current.filter((selectedItem) => selectedItem !== item)
+        : [...current, item]
+    ))
+  }
+
   return (
-    <section className="section section-dark">
+    <section className="section section-dark" id="cost">
       <div className="container two-column">
         <div>
-          <p className="eyebrow">Комплектация</p>
-          <h2>Что может входить в стоимость</h2>
+          <p className="eyebrow">Комплектация и стоимость</p>
+          <h2>Что входит и что влияет на стоимость бани</h2>
           <p>
-            Стоимость рассчитывается индивидуально и зависит от площади, планировки, отделки, печи, остекления, инженерии, фундамента и наполнения.
+            Итоговая смета зависит от площади, планировки, состава помещений, инженерии, фундамента, отделки, печи, дымохода, остекления и внутреннего наполнения.
           </p>
           <p className="accent-note">
-            На сайте указана ориентировочная стоимость от 100 000 ₽/м². Точный расчёт делается после уточнения площади, комплектации и особенностей участка.
+            Нажмите на пункты справа — можно выделить то, что важно для вашей будущей бани. Это просто интерактивный выбор для удобства и не отправляет данные.
           </p>
+          <a className="button button-primary" href="#quiz">Получить предварительный расчёт</a>
         </div>
-        <div className="pill-grid">
-          {included.map((item) => <span className="pill" key={item}>{item}</span>)}
+        <div className="pill-grid interactive-pill-grid">
+          {items.map((item) => {
+            const isSelected = selected.includes(item)
+
+            return (
+              <button
+                className={isSelected ? 'pill interactive-pill selected' : 'pill interactive-pill'}
+                type="button"
+                key={item}
+                onClick={() => toggleItem(item)}
+                aria-pressed={isSelected}
+              >
+                {item}
+              </button>
+            )
+          })}
         </div>
       </div>
     </section>
