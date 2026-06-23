@@ -11,6 +11,7 @@ export default function Header({ legal = false }) {
         <a href="#formats">Форматы</a>
         <a href="#layouts">Планировки</a>
         <a href="#cost">Стоимость</a>
+        <a href="#knowledge">База знаний</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a className="button button-small" href="#feedback">Рассчитать</a>
