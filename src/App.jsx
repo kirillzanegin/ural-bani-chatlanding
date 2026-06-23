@@ -4,6 +4,7 @@ import Thanks from './pages/Thanks.jsx'
 import LegalPage from './pages/LegalPage.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import './quiz-legal.css'
+import './article.css'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
