@@ -15,7 +15,7 @@ export const knowledgeItems = [
     title: 'Какая площадь бани нужна: 15, 20, 30, 40 или 60 м²',
     slug: 'kakaya-ploshchad-bani-nuzhna',
     description: 'Как не переплатить за лишние метры и не сделать баню слишком тесной.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Что входит в баню под ключ',
