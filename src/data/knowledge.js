@@ -21,13 +21,13 @@ export const knowledgeItems = [
     title: 'Что входит в баню под ключ',
     slug: 'chto-vhodit-v-banyu-pod-klyuch',
     description: 'Где заканчивается базовая комплектация и где начинаются индивидуальные решения.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Какую печь выбрать для бани',
     slug: 'kakuyu-pech-vybrat-dlya-bani',
     description: 'Дровяная, электрическая, мощность, дымоход, каменка и удобство обслуживания.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Какой фундамент нужен для отдельно стоящей бани',
