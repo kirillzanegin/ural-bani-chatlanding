@@ -57,13 +57,13 @@ export const knowledgeItems = [
     title: 'Что такое второй свет в бане',
     slug: 'chto-takoe-vtoroy-svet-v-bane',
     description: 'Когда второй свет создаёт эффект пространства, а когда забирает полезную площадь.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Стоит ли делать второй этаж в бане',
     slug: 'stoit-li-delat-vtoroy-etazh-v-bane',
     description: 'Гостевая зона, лестница, безопасность, утепление и реальная стоимость второго этажа.',
-    isReady: false,
+    isReady: true,
   },
   {
     title: 'Как подготовить участок к строительству бани',
