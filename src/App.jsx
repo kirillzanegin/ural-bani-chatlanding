@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Home from './pages/Home.jsx'
 import Thanks from './pages/Thanks.jsx'
 import LegalPage from './pages/LegalPage.jsx'
+import ArticlePage from './pages/ArticlePage.jsx'
 import './quiz-legal.css'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
   if (hash === '#privacy') return <LegalPage type="privacy" />
   if (hash === '#personal-data-consent') return <LegalPage type="personal-data-consent" />
   if (hash === '#cookies') return <LegalPage type="cookies" />
+  if (hash.startsWith('#article/')) return <ArticlePage slug={hash.replace('#article/', '')} />
 
   return <Home />
 }
