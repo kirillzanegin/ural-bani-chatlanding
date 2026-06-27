@@ -136,7 +136,7 @@ export default function ArticlePage({ slug }) {
                   <p className="eyebrow">Чек-лист</p>
                   <h2>Что понять перед заказом проекта</h2>
                   <ArticleChecklist items={article.finalChecklist} />
-                  <a className="button button-primary" href="#feedback">Обсудить баню с менеджером</a>
+                  <a className="button button-primary" href="/#feedback">Обсудить баню с менеджером</a>
                 </section>
               </div>
             </div>
@@ -144,18 +144,18 @@ export default function ArticlePage({ slug }) {
 
           <section className="section article-nav-section">
             <div className="container article-nav">
-              <a className="article-nav-card" href="#knowledge">
+              <a className="article-nav-card" href="/#knowledge">
                 <span>Все материалы</span>
                 <strong>Вернуться в базу знаний</strong>
               </a>
               {previousItem && (
-                <a className="article-nav-card" href={previousItem.isReady ? '#article/' + previousItem.slug : '#knowledge'}>
+                <a className="article-nav-card" href={previousItem.isReady ? '/articles/' + previousItem.slug + '/' : '/#knowledge'}>
                   <span>Предыдущая</span>
                   <strong>{previousItem.title}</strong>
                 </a>
               )}
               {nextItem && (
-                <a className="article-nav-card" href={nextItem.isReady ? '#article/' + nextItem.slug : '#knowledge'}>
+                <a className="article-nav-card" href={nextItem.isReady ? '/articles/' + nextItem.slug + '/' : '/#knowledge'}>
                   <span>Следующая</span>
                   <strong>{nextItem.title}</strong>
                 </a>
