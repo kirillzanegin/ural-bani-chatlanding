@@ -6,6 +6,13 @@ function makeId(title) {
 }
 
 export default function SeoLandingPage({ landing }) {
+  function scrollToSection(sectionId) {
+    const target = document.getElementById(sectionId)
+    if (target) {
+      target.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }
+  }
+
   return (
     <>
       <Header />
@@ -28,9 +35,15 @@ export default function SeoLandingPage({ landing }) {
           <div className="container article-layout">
             <aside className="article-toc">
               <strong>На странице</strong>
-              {landing.sections.map((section) => (
-                <a href={`#${makeId(section.title)}`} key={section.title}>{section.title}</a>
-              ))}
+              {landing.sections.map((section) => {
+                const sectionId = makeId(section.title)
+
+                return (
+                  <button className="article-toc-link" type="button" key={section.title} onClick={() => scrollToSection(sectionId)}>
+                    {section.title}
+                  </button>
+                )
+              })}
               <a href="/#feedback">Рассчитать стоимость</a>
             </aside>
 
