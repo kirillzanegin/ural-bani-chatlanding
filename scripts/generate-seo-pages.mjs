@@ -9,6 +9,7 @@ import { sitePrepArticles } from '../src/data/sitePrepArticles.js'
 import { knowledgeItems } from '../src/data/knowledge.js'
 import { seoLandings } from '../src/data/seoLandings.js'
 import { faqItems } from '../src/data/faq.js'
+import { getLandingEnhancement } from '../src/data/landingEnhancements.js'
 
 const SITE_URL = 'https://бани-урала.рф'
 const BUILD_DATE = '2026-06-28'
@@ -43,11 +44,11 @@ function makeBreadcrumbSchema(items) {
   }
 }
 
-function faqSchema() {
+function makeFaqSchema(items) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -74,7 +75,7 @@ function injectMeta(shell, { title, description, canonical, type = 'website', sc
 }
 
 function renderHomepageShell() {
-  const schema = `    <script type="application/ld+json">${JSON.stringify(faqSchema())}</script>`
+  const schema = `    <script type="application/ld+json">${JSON.stringify(makeFaqSchema(faqItems))}</script>`
   return appShell.replace('    <!-- Yandex.Metrika counter -->', `${schema}
     <!-- Yandex.Metrika counter -->`)
 }
@@ -107,6 +108,7 @@ function renderArticleShell(article) {
 
 function renderLandingShell(landing) {
   const canonical = `${SITE_URL}${landing.path}`
+  const enhancement = getLandingEnhancement(landing.path)
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -120,8 +122,11 @@ function renderLandingShell(landing) {
     { name: 'Главная', url: `${SITE_URL}/` },
     { name: landing.title, url: canonical },
   ])
+  const faqScript = enhancement.faq?.length
+    ? `\n    <script type="application/ld+json">${JSON.stringify(makeFaqSchema(enhancement.faq))}</script>`
+    : ''
   const schema = `    <script type="application/ld+json">${JSON.stringify(serviceSchema)}</script>
-    <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`
+    <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>${faqScript}`
 
   return injectMeta(appShell, {
     title: landing.metaTitle || `${landing.title} - Бани Урала`,
