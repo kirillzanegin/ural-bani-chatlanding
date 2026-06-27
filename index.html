@@ -23,6 +23,22 @@
 
       ym(110205159, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
     </script>
+    <script type="text/javascript">
+      window.addEventListener('hashchange', function() {
+        if (typeof ym === 'function') {
+          ym(110205159, 'hit', location.href);
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        var link = event.target.closest && event.target.closest('a');
+        if (!link || typeof ym !== 'function') return;
+
+        var href = link.getAttribute('href');
+        if (href === '#feedback') ym(110205159, 'reachGoal', 'click_calculate');
+        if (href === '#layouts') ym(110205159, 'reachGoal', 'click_layouts');
+      });
+    </script>
     <!-- /Yandex.Metrika counter -->
   </head>
   <body>
