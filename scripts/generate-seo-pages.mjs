@@ -8,6 +8,7 @@ import { spaceArticles } from '../src/data/spaceArticles.js'
 import { sitePrepArticles } from '../src/data/sitePrepArticles.js'
 import { knowledgeItems } from '../src/data/knowledge.js'
 import { seoLandings } from '../src/data/seoLandings.js'
+import { faqItems } from '../src/data/faq.js'
 
 const SITE_URL = 'https://бани-урала.рф'
 const BUILD_DATE = '2026-06-28'
@@ -42,6 +43,21 @@ function makeBreadcrumbSchema(items) {
   }
 }
 
+function faqSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
 function injectMeta(shell, { title, description, canonical, type = 'website', schema = '' }) {
   return shell
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
@@ -54,6 +70,12 @@ function injectMeta(shell, { title, description, canonical, type = 'website', sc
     .replace(/<meta\s+name="twitter:title"[\s\S]*?\/\>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta\s+name="twitter:description"[\s\S]*?\/\>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
     .replace('    <!-- Yandex.Metrika counter -->', `${schema}
+    <!-- Yandex.Metrika counter -->`)
+}
+
+function renderHomepageShell() {
+  const schema = `    <script type="application/ld+json">${JSON.stringify(faqSchema())}</script>`
+  return appShell.replace('    <!-- Yandex.Metrika counter -->', `${schema}
     <!-- Yandex.Metrika counter -->`)
 }
 
@@ -128,6 +150,8 @@ ${urls.map(({ loc, priority }) => `  <url>
 `
 }
 
+fs.writeFileSync(path.join(distDir, 'index.html'), renderHomepageShell(), 'utf8')
+
 for (const article of allArticles) {
   const articleDir = path.join(distDir, 'articles', article.slug)
   fs.mkdirSync(articleDir, { recursive: true })
@@ -143,4 +167,4 @@ for (const landing of seoLandings) {
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), renderSitemap(), 'utf8')
 fs.writeFileSync(path.join(distDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`, 'utf8')
 
-console.log(`Generated ${allArticles.length} article pages, ${seoLandings.length} landing pages and sitemap.xml`)
+console.log(`Generated homepage schema, ${allArticles.length} article pages, ${seoLandings.length} landing pages and sitemap.xml`)
