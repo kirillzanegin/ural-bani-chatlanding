@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { sendLeadToWebhook } from '../utils/leadWebhook.js'
 
 export default function FeedbackForm() {
   const [contact, setContact] = useState({ name: '', phone: '', comment: '', consent: false })
   const [errors, setErrors] = useState({})
   const [validationAttempt, setValidationAttempt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
 
   function updateContact(field, value) {
     setContact({ ...contact, [field]: value })
@@ -14,7 +16,7 @@ export default function FeedbackForm() {
     }
   }
 
-  function submitForm(event) {
+  async function submitForm(event) {
     event.preventDefault()
 
     const nextErrors = {
@@ -30,13 +32,9 @@ export default function FeedbackForm() {
       return
     }
 
-    const lead = {
-      source: 'feedback-form',
-      contact,
-      createdAt: new Date().toISOString(),
-    }
-
-    console.log('Feedback payload:', lead)
+    setIsSending(true)
+    await sendLeadToWebhook({ formSource: 'Нижняя форма', contact })
+    setIsSending(false)
     setSubmitted(true)
   }
 
@@ -100,7 +98,9 @@ export default function FeedbackForm() {
                 </span>
               </label>
               <div className="quiz-actions">
-                <button className="button button-primary" type="submit">Отправить</button>
+                <button className="button button-primary" type="submit" disabled={isSending}>
+                  {isSending ? 'Отправляем...' : 'Отправить'}
+                </button>
               </div>
             </form>
           )}
