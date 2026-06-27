@@ -1,11 +1,48 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import { getLandingEnhancement } from '../data/landingEnhancements.js'
 
 function makeId(title) {
   return title.toLowerCase().replaceAll(' ', '-')
 }
 
+function SectionLinks({ links }) {
+  if (!links?.length) return null
+
+  return (
+    <div className="article-card-grid">
+      {links.map((link) => (
+        <a className="article-info-card" href={link.href} key={link.href}>
+          <h3>{link.label}</h3>
+          <p>Открыть связанный материал</p>
+        </a>
+      ))}
+    </div>
+  )
+}
+
+function LandingFaq({ items }) {
+  if (!items?.length) return null
+
+  return (
+    <section className="article-section">
+      <h2>Частые вопросы</h2>
+      <div className="faq-list">
+        {items.map((item) => (
+          <details className="faq-item" key={item.question}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export default function SeoLandingPage({ landing }) {
+  const enhancement = getLandingEnhancement(landing.path)
+  const sections = [...landing.sections, ...enhancement.sections]
+
   function scrollToSection(sectionId) {
     const target = document.getElementById(sectionId)
     if (target) {
@@ -35,7 +72,7 @@ export default function SeoLandingPage({ landing }) {
           <div className="container article-layout">
             <aside className="article-toc">
               <strong>На странице</strong>
-              {landing.sections.map((section) => {
+              {sections.map((section) => {
                 const sectionId = makeId(section.title)
 
                 return (
@@ -44,11 +81,14 @@ export default function SeoLandingPage({ landing }) {
                   </button>
                 )
               })}
+              {enhancement.faq?.length > 0 && (
+                <button className="article-toc-link" type="button" onClick={() => scrollToSection('faq')}>Частые вопросы</button>
+              )}
               <a href="/#feedback">Рассчитать стоимость</a>
             </aside>
 
             <div className="article-content">
-              {landing.sections.map((section) => (
+              {sections.map((section) => (
                 <section className="article-section" id={makeId(section.title)} key={section.title}>
                   <h2>{section.title}</h2>
                   {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -57,8 +97,13 @@ export default function SeoLandingPage({ landing }) {
                       {section.list.map((item) => <li key={item}>{item}</li>)}
                     </ul>
                   )}
+                  <SectionLinks links={section.links} />
                 </section>
               ))}
+
+              <section id="faq">
+                <LandingFaq items={enhancement.faq} />
+              </section>
 
               <section className="article-final-checklist">
                 <p className="eyebrow">Следующий шаг</p>
