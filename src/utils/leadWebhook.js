@@ -1,3 +1,5 @@
+import { reachGoal } from './metrika.js'
+
 const LEAD_WEBHOOK_URL = 'https://zeehost.ru/webhook/bani_urala'
 
 function getUtmParams() {
@@ -16,6 +18,18 @@ function normalizeList(value, customValue = '') {
   const items = Array.isArray(value) ? value : value ? [value] : []
   const custom = customValue ? [customValue] : []
   return [...items, ...custom].filter(Boolean).join(', ')
+}
+
+function trackLeadGoals(formSource) {
+  reachGoal('lead_submit')
+
+  if (formSource === 'Чат-опрос') {
+    reachGoal('quiz_submit')
+  }
+
+  if (formSource === 'Нижняя форма') {
+    reachGoal('feedback_submit')
+  }
 }
 
 export async function sendLeadToWebhook(payload) {
@@ -46,6 +60,8 @@ export async function sendLeadToWebhook(payload) {
     },
     body: JSON.stringify(lead),
   })
+
+  trackLeadGoals(lead.formSource)
 
   return lead
 }
