@@ -11,7 +11,7 @@ export default function KnowledgeBase() {
         <div className="knowledge-grid">
           {knowledgeItems.map((item) => (
             item.isReady ? (
-              <a className="knowledge-card knowledge-card-link" href={'#article/' + item.slug} key={item.title}>
+              <a className="knowledge-card knowledge-card-link" href={'/articles/' + item.slug + '/'} key={item.title}>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <span className="text-link">Читать статью</span>
