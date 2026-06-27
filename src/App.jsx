@@ -7,18 +7,36 @@ import './quiz-legal.css'
 import './article.css'
 import './article-fixes.css'
 
+function getRoute() {
+  return {
+    hash: window.location.hash,
+    pathname: window.location.pathname,
+  }
+}
+
+function getArticleSlug(pathname) {
+  const match = pathname.match(/^\/articles\/([^/]+)\/?$/)
+  return match ? match[1] : ''
+}
+
 export default function App() {
-  const [hash, setHash] = useState(window.location.hash)
+  const [route, setRoute] = useState(getRoute)
+  const articleSlug = getArticleSlug(route.pathname)
+  const hash = route.hash
 
   useEffect(() => {
-    const handleHashChange = () => setHash(window.location.hash)
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
+    const handleRouteChange = () => setRoute(getRoute())
+    window.addEventListener('hashchange', handleRouteChange)
+    window.addEventListener('popstate', handleRouteChange)
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange)
+      window.removeEventListener('popstate', handleRouteChange)
+    }
   }, [])
 
   useEffect(() => {
     window.setTimeout(() => {
-      if (hash.startsWith('#article/')) {
+      if (articleSlug || hash.startsWith('#article/')) {
         window.scrollTo({ top: 0, behavior: 'auto' })
         return
       }
@@ -35,12 +53,13 @@ export default function App() {
         target.scrollIntoView({ block: 'start', behavior: 'auto' })
       }
     }, 0)
-  }, [hash])
+  }, [hash, articleSlug])
 
   if (hash === '#thanks') return <Thanks />
   if (hash === '#privacy') return <LegalPage type="privacy" />
   if (hash === '#personal-data-consent') return <LegalPage type="personal-data-consent" />
   if (hash === '#cookies') return <LegalPage type="cookies" />
+  if (articleSlug) return <ArticlePage slug={articleSlug} />
   if (hash.startsWith('#article/')) return <ArticlePage slug={hash.replace('#article/', '')} />
 
   return <Home />
