@@ -12,23 +12,25 @@ function getUtmParams() {
   }
 }
 
-function normalizeList(value) {
-  if (Array.isArray(value)) return value.join(', ')
-  return value || ''
+function normalizeList(value, customValue = '') {
+  const items = Array.isArray(value) ? value : value ? [value] : []
+  const custom = customValue ? [customValue] : []
+  return [...items, ...custom].filter(Boolean).join(', ')
 }
 
 export async function sendLeadToWebhook(payload) {
   const now = new Date()
+  const contact = payload.contact || {}
   const lead = {
     date: now.toLocaleDateString('ru-RU'),
     time: now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
     createdAt: now.toISOString(),
     formSource: payload.formSource || '',
-    name: payload.name || '',
-    phone: payload.phone || '',
-    comment: payload.comment || '',
-    area: normalizeList(payload.area),
-    rooms: normalizeList(payload.rooms),
+    name: payload.name || contact.name || '',
+    phone: payload.phone || contact.phone || '',
+    comment: payload.comment || contact.comment || '',
+    area: normalizeList(payload.area, payload.areaCustom),
+    rooms: normalizeList(payload.rooms, payload.roomsCustom),
     term: normalizeList(payload.term),
     page: window.location.href,
     referrer: document.referrer || '',
