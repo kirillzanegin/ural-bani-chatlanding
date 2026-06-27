@@ -1,4 +1,4 @@
-const LEAD_WEBHOOK_URL = 'https://zeehost.ru/webhook-test/bani_urala'
+const LEAD_WEBHOOK_URL = 'https://zeehost.ru/webhook/bani_urala'
 
 function getUtmParams() {
   const params = new URLSearchParams(window.location.search)
