@@ -3,6 +3,8 @@ import Home from './pages/Home.jsx'
 import Thanks from './pages/Thanks.jsx'
 import LegalPage from './pages/LegalPage.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
+import SeoLandingPage from './pages/SeoLandingPage.jsx'
+import { getSeoLandingByPath } from './data/seoLandings.js'
 import './quiz-legal.css'
 import './article.css'
 import './article-fixes.css'
@@ -22,6 +24,7 @@ function getArticleSlug(pathname) {
 export default function App() {
   const [route, setRoute] = useState(getRoute)
   const articleSlug = getArticleSlug(route.pathname)
+  const landing = getSeoLandingByPath(route.pathname)
   const hash = route.hash
 
   useEffect(() => {
@@ -36,7 +39,7 @@ export default function App() {
 
   useEffect(() => {
     window.setTimeout(() => {
-      if (articleSlug || hash.startsWith('#article/')) {
+      if (articleSlug || landing || hash.startsWith('#article/')) {
         window.scrollTo({ top: 0, behavior: 'auto' })
         return
       }
@@ -53,13 +56,14 @@ export default function App() {
         target.scrollIntoView({ block: 'start', behavior: 'auto' })
       }
     }, 0)
-  }, [hash, articleSlug])
+  }, [hash, articleSlug, landing])
 
   if (hash === '#thanks') return <Thanks />
   if (hash === '#privacy') return <LegalPage type="privacy" />
   if (hash === '#personal-data-consent') return <LegalPage type="personal-data-consent" />
   if (hash === '#cookies') return <LegalPage type="cookies" />
   if (articleSlug) return <ArticlePage slug={articleSlug} />
+  if (landing) return <SeoLandingPage landing={landing} />
   if (hash.startsWith('#article/')) return <ArticlePage slug={hash.replace('#article/', '')} />
 
   return <Home />
