@@ -6,6 +6,7 @@ import Included from '../components/Included.jsx'
 import RealProjects from '../components/RealProjects.jsx'
 import Layouts from '../components/Layouts.jsx'
 import WorkSteps from '../components/WorkSteps.jsx'
+import SeoDirections from '../components/SeoDirections.jsx'
 import KnowledgeBase from '../components/KnowledgeBase.jsx'
 import Reviews from '../components/Reviews.jsx'
 import FAQ from '../components/FAQ.jsx'
@@ -25,6 +26,7 @@ export default function Home() {
         <RealProjects />
         <Layouts />
         <WorkSteps />
+        <SeoDirections />
         <KnowledgeBase />
         <Reviews />
         <FAQ />
