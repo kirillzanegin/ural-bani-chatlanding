@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { quizSteps } from '../data/quiz.js'
+import { sendLeadToWebhook } from '../utils/leadWebhook.js'
 
 export default function ChatQuiz() {
   const [stepIndex, setStepIndex] = useState(0)
@@ -8,6 +9,7 @@ export default function ChatQuiz() {
   const [errors, setErrors] = useState({})
   const [validationAttempt, setValidationAttempt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
 
   const step = quizSteps[stepIndex]
   const isContactStep = stepIndex >= quizSteps.length
@@ -52,7 +54,7 @@ export default function ChatQuiz() {
     setStepIndex(Math.max(0, stepIndex - 1))
   }
 
-  function submitForm(event) {
+  async function submitForm(event) {
     event.preventDefault()
 
     const nextErrors = {
@@ -69,14 +71,31 @@ export default function ChatQuiz() {
     }
 
     const lead = {
-      ...answers,
-      contact,
-      createdAt: new Date().toISOString(),
+      formSource: 'Чат-опрос',
+      name: contact.name.trim(),
+      phone: contact.phone.trim(),
+      comment: contact.comment.trim(),
+      area: answers.area || [],
+      areaCustom: answers.areaCustom || '',
+      rooms: answers.rooms || [],
+      roomsCustom: answers.roomsCustom || '',
+      term: answers.term || [],
+      consent: contact.consent,
+      quizAnswers: answers,
     }
 
-    console.log('Lead payload:', lead)
-    setSubmitted(true)
-    window.location.hash = 'thanks'
+    try {
+      setIsSending(true)
+      await sendLeadToWebhook(lead)
+      setSubmitted(true)
+      window.location.hash = 'thanks'
+    } catch (error) {
+      console.error('Lead sending error:', error)
+      setSubmitted(true)
+      window.location.hash = 'thanks'
+    } finally {
+      setIsSending(false)
+    }
   }
 
   const nameClass = errors.name ? 'field-error invalid-shake' : ''
@@ -140,7 +159,9 @@ export default function ChatQuiz() {
               </label>
               <div className="quiz-actions">
                 <button className="button button-ghost" type="button" onClick={goBack}>Назад</button>
-                <button className="button button-primary" type="submit">Отправить</button>
+                <button className="button button-primary" type="submit" disabled={isSending}>
+                  {isSending ? 'Отправляем...' : 'Отправить'}
+                </button>
               </div>
             </form>
           ) : (
