@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Планировка бани 15 м²</title>
+  <desc id="desc">Схема бани 5000 на 3000 мм: парная, помывочная и комната отдыха.</desc>
+  <defs>
+    <pattern id="smallGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#e7e1d8" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="url(#smallGrid)"/>
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#d8d0c7" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="wood" width="18" height="18" patternUnits="userSpaceOnUse">
+      <rect width="18" height="18" fill="#f5e3ca"/>
+      <path d="M0 6 H18 M0 13 H18" stroke="#dfc19b" stroke-width="1" opacity="0.65"/>
+    </pattern>
+    <pattern id="tile" width="36" height="36" patternUnits="userSpaceOnUse">
+      <rect width="36" height="36" fill="#f7f3ec"/>
+      <path d="M36 0 H0 V36" fill="none" stroke="#ddd6cc" stroke-width="1.1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#111"/>
+    </marker>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1f2326" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="1000" fill="#fbfaf6"/>
+  <rect width="1400" height="1000" fill="url(#grid)"/>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#1f2326">
+    <!-- Dimensions -->
+    <line x1="150" y1="105" x2="1250" y2="105" stroke="#111" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="130" y1="70" x2="130" y2="140" stroke="#111" stroke-width="2"/>
+    <line x1="1270" y1="70" x2="1270" y2="140" stroke="#111" stroke-width="2"/>
+    <text x="700" y="82" text-anchor="middle" font-size="38" font-weight="500">5000</text>
+
+    <line x1="80" y1="220" x2="80" y2="820" stroke="#111" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="50" y1="200" x2="120" y2="200" stroke="#111" stroke-width="2"/>
+    <line x1="50" y1="840" x2="120" y2="840" stroke="#111" stroke-width="2"/>
+    <text x="48" y="535" text-anchor="middle" font-size="38" transform="rotate(-90 48 535)" font-weight="500">3000</text>
+
+    <!-- Main plan exterior -->
+    <g filter="url(#softShadow)">
+      <rect x="150" y="200" width="1100" height="640" fill="#f7efe3" stroke="#1f2326" stroke-width="4"/>
+      <rect x="150" y="200" width="1100" height="640" fill="none" stroke="#8b8b88" stroke-width="32" stroke-linejoin="miter"/>
+    </g>
+
+    <!-- Interior rooms -->
+    <rect x="184" y="234" width="360" height="572" fill="url(#wood)" stroke="#1f2326" stroke-width="3"/>
+    <rect x="544" y="234" width="320" height="572" fill="url(#tile)" stroke="#1f2326" stroke-width="3"/>
+    <rect x="864" y="234" width="352" height="572" fill="url(#wood)" stroke="#1f2326" stroke-width="3"/>
+
+    <!-- Interior partitions -->
+    <rect x="530" y="200" width="28" height="640" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+    <rect x="850" y="200" width="28" height="640" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+
+    <!-- Steam room benches -->
+    <g stroke="#1f2326" stroke-width="2" fill="#f2d1a5">
+      <rect x="198" y="248" width="318" height="68"/>
+      <rect x="198" y="316" width="82" height="430"/>
+      <rect x="198" y="686" width="270" height="86"/>
+      <path d="M198 316 L280 398 L516 398 L516 316 Z" fill="#f5dfbd" opacity="0.65"/>
+      <path d="M198 686 L280 604 L468 604 L468 686 Z" fill="#f5dfbd" opacity="0.5"/>
+      <path d="M218 272 H500 M218 294 H500 M220 342 V728 M245 342 V728 M198 710 H452 M198 736 H452" stroke="#caa06f" stroke-width="2"/>
+    </g>
+
+    <!-- Stove -->
+    <g transform="translate(388 612)">
+      <rect x="0" y="0" width="96" height="122" rx="6" fill="#3d4245" stroke="#111" stroke-width="3"/>
+      <rect x="16" y="18" width="64" height="82" rx="5" fill="#202326" stroke="#111" stroke-width="2"/>
+      <g fill="#747a7d" stroke="#111" stroke-width="1.2">
+        <circle cx="30" cy="40" r="10"/><circle cx="48" cy="34" r="11"/><circle cx="62" cy="48" r="12"/>
+        <circle cx="35" cy="62" r="11"/><circle cx="56" cy="68" r="10"/><circle cx="45" cy="83" r="9"/>
+      </g>
+      <rect x="38" y="-46" width="20" height="48" fill="#aaa" stroke="#111" stroke-width="2"/>
+    </g>
+
+    <!-- Shower and washroom bench -->
+    <g stroke="#1f2326" stroke-width="3" fill="#eef2f2">
+      <path d="M688 248 H820 V380 C748 380 688 320 688 248 Z"/>
+      <path d="M706 270 C732 286 754 312 766 348" fill="none" stroke="#9aa1a3" stroke-width="2"/>
+      <circle cx="786" cy="274" r="8" fill="#dfe7e7"/>
+      <line x1="776" y1="286" x2="748" y2="322" stroke="#4a4d50"/>
+      <circle cx="742" cy="330" r="9" fill="#dfe7e7"/>
+    </g>
+    <rect x="570" y="720" width="240" height="58" fill="#e6bd82" stroke="#1f2326" stroke-width="3"/>
+    <path d="M580 736 H800 M580 754 H800" stroke="#b8834e" stroke-width="2"/>
+
+    <!-- Rest room furniture -->
+    <g stroke="#1f2326" stroke-width="3">
+      <rect x="952" y="260" width="220" height="94" rx="18" fill="#f4bd85"/>
+      <rect x="940" y="276" width="36" height="76" rx="10" fill="#f0ae72"/>
+      <rect x="1148" y="276" width="36" height="76" rx="10" fill="#f0ae72"/>
+      <line x1="1016" y1="260" x2="1016" y2="354" stroke="#9c6944" stroke-width="2"/>
+      <line x1="1085" y1="260" x2="1085" y2="354" stroke="#9c6944" stroke-width="2"/>
+    </g>
+    <g transform="translate(1130 470)" stroke="#1f2326" stroke-width="3">
+      <circle cx="0" cy="0" r="44" fill="#d7b78d"/>
+      <circle cx="0" cy="0" r="32" fill="#cba678" opacity="0.65"/>
+      <g fill="#4e8c49" stroke="#24612b" stroke-width="2">
+        <ellipse cx="0" cy="-8" rx="8" ry="20" transform="rotate(15)"/>
+        <ellipse cx="-14" cy="4" rx="8" ry="18" transform="rotate(-60)"/>
+        <ellipse cx="14" cy="5" rx="8" ry="18" transform="rotate(60)"/>
+      </g>
+    </g>
+    <g stroke="#1f2326" stroke-width="3">
+      <rect x="1110" y="622" width="82" height="164" fill="#d6a66e"/>
+      <rect x="1124" y="640" width="54" height="128" fill="#e7bf8d"/>
+      <line x1="1151" y1="650" x2="1151" y2="764" stroke="#b47b43" stroke-width="2"/>
+      <rect x="1142" y="696" width="8" height="30" rx="4" fill="#8d5b2e"/>
+    </g>
+
+    <!-- Doors: steam to washroom, washroom to rest room, main entrance -->
+    <g stroke="#111" stroke-width="3" fill="none">
+      <path d="M544 452 L620 452"/>
+      <path d="M544 452 A88 88 0 0 1 622 532"/>
+      <line x1="544" y1="452" x2="544" y2="540"/>
+
+      <path d="M864 590 L940 590"/>
+      <path d="M864 590 A88 88 0 0 1 940 668"/>
+      <line x1="864" y1="590" x2="864" y2="678"/>
+
+      <path d="M950 840 L950 920"/>
+      <path d="M950 840 A88 88 0 0 1 1032 920"/>
+      <line x1="950" y1="840" x2="1038" y2="840"/>
+    </g>
+
+    <!-- Door openings masks / thresholds -->
+    <rect x="530" y="442" width="30" height="110" fill="#f7f3ec"/>
+    <rect x="850" y="578" width="30" height="110" fill="#f7efe3"/>
+    <rect x="930" y="824" width="118" height="30" fill="#fbfaf6"/>
+    <rect x="910" y="836" width="140" height="14" fill="#d8d0c7" stroke="#111" stroke-width="2"/>
+
+    <!-- Wall caps back over masks -->
+    <rect x="530" y="200" width="28" height="240" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+    <rect x="530" y="552" width="28" height="288" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+    <rect x="850" y="200" width="28" height="376" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+    <rect x="850" y="690" width="28" height="150" fill="#8b8b88" stroke="#1f2326" stroke-width="2"/>
+
+    <!-- Windows / vents -->
+    <rect x="1224" y="420" width="12" height="134" fill="#e9edf0" stroke="#1f2326" stroke-width="2"/>
+    <rect x="700" y="824" width="92" height="12" fill="#e9edf0" stroke="#1f2326" stroke-width="2"/>
+
+    <!-- Labels -->
+    <text x="355" y="520" text-anchor="middle" font-size="34" font-weight="500">Парная</text>
+    <text x="355" y="565" text-anchor="middle" font-size="34" font-weight="500">4,0 м²</text>
+
+    <text x="704" y="560" text-anchor="middle" font-size="34" font-weight="500">Помывочная</text>
+    <text x="704" y="606" text-anchor="middle" font-size="34" font-weight="500">4,0 м²</text>
+
+    <text x="1040" y="530" text-anchor="middle" font-size="34" font-weight="500">Комната</text>
+    <text x="1040" y="575" text-anchor="middle" font-size="34" font-weight="500">отдыха</text>
+    <text x="1040" y="620" text-anchor="middle" font-size="34" font-weight="500">7,0 м²</text>
+  </g>
+</svg>
