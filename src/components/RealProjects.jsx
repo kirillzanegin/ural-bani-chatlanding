@@ -9,7 +9,6 @@ export default function RealProjects() {
           <h2>{featuredProject.title}</h2>
         </div>
         <div className="project-copy">
-          <p>{featuredProject.description}</p>
           <ul className="project-features">
             {featuredProject.features.map((feature) => <li key={feature}>{feature}</li>)}
           </ul>

@@ -9,7 +9,7 @@ export default function KnowledgeBase() {
           <h2>База знаний</h2>
         </div>
         <div className="knowledge-grid">
-          {knowledgeItems.slice(0, 3).map((item) => (
+          {knowledgeItems.map((item) => (
             item.isReady ? (
               <a className="knowledge-card knowledge-card-link" href={'/articles/' + item.slug + '/'} key={item.title}>
                 <h3>{item.title}</h3>
