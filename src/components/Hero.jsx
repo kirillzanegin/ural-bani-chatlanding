@@ -1,35 +1,38 @@
 export default function Hero() {
-  const heroBackground = `${import.meta.env.BASE_URL}hero-bath-bg.webp`
+  const heroImage = `${import.meta.env.BASE_URL}project-exterior.webp`
 
   return (
     <section className="hero" id="top">
-      <div
-        className="hero-media"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `url(${heroBackground})`,
-        }}
-      />
-      <div className="hero-overlay" />
-      <div className="container hero-content">
-        <p className="eyebrow">Строим качественные бани под ключ</p>
-        <h1>О какой бане вы мечтаете?</h1>
-        <p className="hero-subtitle">
-          Берем на себя заботы обо всех процессах от проектирования до установки мебели.
-        </p>
-        <p className="hero-subtitle hero-subtitle-secondary">
-          Строим в Свердловской, Курганской, Тюменской и Челябинской областях.
-        </p>
-        <div className="hero-facts">
-          <span>от 15 м²</span>
-          <span>индивидуальные решения</span>
-          <span>монтаж от 3 недель</span>
-          <span>гарантия 3 года</span>
+      <div className="container hero-grid">
+        <div className="hero-content">
+          <p className="eyebrow">Бани Урала</p>
+          <h1>Строим бани под ключ на Урале</h1>
+          <p className="hero-subtitle">
+            Проектируем под ваш участок, строим и комплектуем - от парной и помывочной до инженерии, отделки и мебели.
+          </p>
+          <p className="hero-region">
+            Работаем в Свердловской, Челябинской, Тюменской и Курганской областях.
+          </p>
+          <div className="hero-facts" aria-label="Основные условия">
+            <span>от 15 м²</span>
+            <span>монтаж от 3 недель</span>
+            <span>гарантия 3 года</span>
+            <span>индивидуальная планировка</span>
+          </div>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#quiz">Получить предварительный расчёт</a>
+            <a className="button button-ghost button-ghost-light" href="#project">Посмотреть готовую баню</a>
+          </div>
         </div>
-        <div className="hero-actions">
-          <a className="button button-primary" href="#feedback">Рассчитать стоимость</a>
-          <a className="button button-ghost" href="#layouts">Посмотреть планировки</a>
-        </div>
+
+        <figure className="hero-photo">
+          <img
+            src={heroImage}
+            alt="Готовая баня с крытой террасой на загородном участке"
+            fetchPriority="high"
+          />
+          <figcaption>Готовая баня с крытой террасой</figcaption>
+        </figure>
       </div>
     </section>
   )

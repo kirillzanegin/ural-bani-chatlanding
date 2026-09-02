@@ -1,24 +1,28 @@
-import { projectPlaceholders } from '../data/projects.js'
+import { featuredProject } from '../data/projects.js'
 
 export default function RealProjects() {
   return (
-    <section className="section">
-      <div className="container">
-        <div className="section-head">
-          <p className="eyebrow">Объекты</p>
-          <h2>Реальные действующие проекты</h2>
-          <p>Блок готов под будущие фотографии, видео, описания комплектаций и особенности объектов.</p>
+    <section className="section project-section" id="project">
+      <div className="container project-intro">
+        <div>
+          <p className="eyebrow">Готовый объект</p>
+          <h2>{featuredProject.title}</h2>
         </div>
-        <div className="cards-grid">
-          {projectPlaceholders.map((project) => (
-            <article className="card" key={project.title}>
-              <div className="image-placeholder">{project.label}</div>
-              <h3>{project.title}</h3>
-              <p>{project.details}</p>
-              <a className="text-link" href="#quiz">Хочу похожую</a>
-            </article>
-          ))}
+        <div className="project-copy">
+          <p>{featuredProject.description}</p>
+          <ul className="project-features">
+            {featuredProject.features.map((feature) => <li key={feature}>{feature}</li>)}
+          </ul>
+          <a className="button button-primary" href="#quiz">Обсудить похожую баню</a>
         </div>
+      </div>
+
+      <div className="container project-gallery" aria-label="Фотографии готовой бани">
+        {featuredProject.images.map((image, index) => (
+          <figure className={`project-gallery-item project-gallery-item-${index + 1}`} key={image.src}>
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          </figure>
+        ))}
       </div>
     </section>
   )

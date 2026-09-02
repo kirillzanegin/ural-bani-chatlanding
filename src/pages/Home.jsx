@@ -4,13 +4,9 @@ import ChatQuiz from '../components/ChatQuiz.jsx'
 import BathFormats from '../components/BathFormats.jsx'
 import Included from '../components/Included.jsx'
 import RealProjects from '../components/RealProjects.jsx'
-import Layouts from '../components/Layouts.jsx'
 import WorkSteps from '../components/WorkSteps.jsx'
-import SeoDirections from '../components/SeoDirections.jsx'
 import KnowledgeBase from '../components/KnowledgeBase.jsx'
-import Reviews from '../components/Reviews.jsx'
 import FAQ from '../components/FAQ.jsx'
-import FinalCTA from '../components/FinalCTA.jsx'
 import FeedbackForm from '../components/FeedbackForm.jsx'
 import Footer from '../components/Footer.jsx'
 
@@ -20,17 +16,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ChatQuiz />
-        <BathFormats />
-        <Included />
         <RealProjects />
-        <Layouts />
+        <BathFormats />
+        <ChatQuiz />
+        <Included />
         <WorkSteps />
-        <SeoDirections />
         <KnowledgeBase />
-        <Reviews />
         <FAQ />
-        <FinalCTA />
         <FeedbackForm />
       </main>
       <Footer />
