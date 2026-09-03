@@ -5,6 +5,7 @@ import LegalPage from './pages/LegalPage.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import SeoLandingPage from './pages/SeoLandingPage.jsx'
 import { getSeoLandingByPath } from './data/seoLandings.js'
+import { reachMailruGoal } from './utils/mailru.js'
 import { reachGoal, trackPageView } from './utils/metrika.js'
 import './quiz-legal.css'
 import './article.css'
@@ -47,6 +48,7 @@ export default function App() {
       const href = link.getAttribute('href') || ''
       if (/(^|\/)#(quiz|feedback)$/.test(href)) {
         reachGoal('click_calculate')
+        reachMailruGoal('click_calculate')
       }
 
       if (/(^|\/)#layouts$/.test(href)) {
@@ -55,6 +57,7 @@ export default function App() {
 
       if (href.startsWith('tel:')) {
         reachGoal('click_phone')
+        reachMailruGoal('click_phone')
       }
     }
 
