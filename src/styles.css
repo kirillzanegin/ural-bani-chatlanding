@@ -23,6 +23,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.hero,
+.section {
+  scroll-margin-top: 78px;
+}
+
 body {
   margin: 0;
   color: var(--graphite);
@@ -110,41 +115,28 @@ textarea {
 
 .hero {
   position: relative;
-  min-height: 760px;
+  min-height: 720px;
   display: grid;
   align-items: center;
   overflow: hidden;
   color: var(--white);
-  background: var(--graphite);
-}
-
-.hero-background,
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-background {
-  display: block;
-  object-fit: cover;
-  object-position: 50% 56%;
-  filter: saturate(0.92) contrast(1.03);
-}
-
-.hero-overlay {
-  z-index: 1;
   background:
-    linear-gradient(90deg, rgba(14, 17, 18, 0.92) 0%, rgba(14, 17, 18, 0.82) 38%, rgba(14, 17, 18, 0.48) 67%, rgba(14, 17, 18, 0.18) 100%),
-    linear-gradient(180deg, rgba(14, 17, 18, 0.22) 0%, rgba(14, 17, 18, 0.04) 52%, rgba(14, 17, 18, 0.46) 100%);
+    radial-gradient(circle at 72% 22%, rgba(184, 121, 58, 0.14), transparent 32%),
+    linear-gradient(135deg, #171b1d 0%, var(--graphite) 58%, #252c28 100%);
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
-  width: min(1160px, calc(100% - 32px));
-  padding: clamp(76px, 9vw, 118px) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(520px, 1.12fr);
+  align-items: center;
+  gap: clamp(38px, 5vw, 76px);
+  width: min(1360px, calc(100% - 48px));
+  padding: clamp(62px, 7vw, 94px) 0;
+}
+
+.hero-copy {
+  min-width: 0;
 }
 
 .eyebrow {
@@ -165,8 +157,8 @@ textarea {
 }
 
 .hero h1 {
-  max-width: 820px;
-  font-size: clamp(58px, 7.2vw, 104px);
+  max-width: 650px;
+  font-size: clamp(58px, 5.15vw, 84px);
   line-height: 0.94;
 }
 
@@ -175,9 +167,9 @@ textarea {
 }
 
 .hero-subtitle {
-  max-width: 680px;
+  max-width: 610px;
   margin: 30px 0 0;
-  font-size: clamp(19px, 2.2vw, 26px);
+  font-size: clamp(18px, 1.55vw, 22px);
   line-height: 1.42;
   color: rgba(255,255,255,0.9);
 }
@@ -211,6 +203,42 @@ textarea {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 36px;
+}
+
+.hero-media {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 1.22 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 34px;
+  background: var(--graphite-soft);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.32);
+}
+
+.hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 51%;
+  filter: saturate(0.96) contrast(1.02);
+}
+
+.hero-media figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  width: fit-content;
+  padding: 9px 12px;
+  border-radius: 999px;
+  color: var(--white);
+  background: rgba(19, 23, 24, 0.72);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .button-ghost-light {
@@ -673,17 +701,17 @@ textarea {
   }
 
   .hero {
-    min-height: 720px;
+    min-height: auto;
   }
 
-  .hero-background {
-    object-position: 58% 54%;
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    width: min(760px, calc(100% - 40px));
   }
 
-  .hero-overlay {
-    background:
-      linear-gradient(90deg, rgba(14, 17, 18, 0.90) 0%, rgba(14, 17, 18, 0.75) 64%, rgba(14, 17, 18, 0.38) 100%),
-      linear-gradient(180deg, rgba(14, 17, 18, 0.18) 0%, rgba(14, 17, 18, 0.24) 54%, rgba(14, 17, 18, 0.60) 100%);
+  .hero-media {
+    aspect-ratio: 4 / 3;
   }
 
   .format-grid {
@@ -718,23 +746,29 @@ textarea {
   }
 
   .hero {
-    min-height: 710px;
+    min-height: auto;
   }
 
   .hero-content {
-    padding: 68px 0 56px;
+    gap: 34px;
+    width: min(620px, calc(100% - 32px));
+    padding: 56px 0 34px;
   }
 
   .hero h1 {
     font-size: clamp(48px, 14.5vw, 66px);
   }
 
-  .hero-background {
-    object-position: 62% 50%;
+  .hero-media {
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
   }
 
-  .hero-overlay {
-    background: linear-gradient(180deg, rgba(14, 17, 18, 0.62) 0%, rgba(14, 17, 18, 0.72) 54%, rgba(14, 17, 18, 0.86) 100%);
+  .hero-media figcaption {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    font-size: 12px;
   }
 
   .hero-actions,

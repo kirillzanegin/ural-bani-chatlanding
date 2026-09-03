@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { quizSteps } from '../data/quiz.js'
 import { sendLeadToWebhook } from '../utils/leadWebhook.js'
+import { validateLeadContact } from '../utils/formValidation.js'
 
 export default function ChatQuiz() {
   const [stepIndex, setStepIndex] = useState(0)
@@ -10,6 +11,7 @@ export default function ChatQuiz() {
   const [validationAttempt, setValidationAttempt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [isSending, setIsSending] = useState(false)
+  const [submissionError, setSubmissionError] = useState('')
 
   const step = quizSteps[stepIndex]
   const isContactStep = stepIndex >= quizSteps.length
@@ -38,6 +40,7 @@ export default function ChatQuiz() {
 
   function updateContact(field, value) {
     setContact({ ...contact, [field]: value })
+    setSubmissionError('')
 
     if (errors[field]) {
       setErrors({ ...errors, [field]: false })
@@ -57,11 +60,7 @@ export default function ChatQuiz() {
   async function submitForm(event) {
     event.preventDefault()
 
-    const nextErrors = {
-      name: !contact.name.trim(),
-      phone: !contact.phone.trim(),
-      consent: !contact.consent,
-    }
+    const nextErrors = validateLeadContact(contact)
 
     setErrors(nextErrors)
 
@@ -91,8 +90,7 @@ export default function ChatQuiz() {
       window.location.hash = 'thanks'
     } catch (error) {
       console.error('Lead sending error:', error)
-      setSubmitted(true)
-      window.location.hash = 'thanks'
+      setSubmissionError('Не удалось отправить заявку. Проверьте подключение к интернету и попробуйте ещё раз.')
     } finally {
       setIsSending(false)
     }
@@ -122,25 +120,41 @@ export default function ChatQuiz() {
           ) : isContactStep ? (
             <form onSubmit={submitForm} noValidate>
               <h3>Куда отправить предварительный расчёт?</h3>
-              <label className={nameClass} key={`name-${validationAttempt}`}>
+              <label className={nameClass} htmlFor="quiz-name" key={`name-${validationAttempt}`}>
                 Имя
                 <input
+                  id="quiz-name"
+                  name="name"
+                  autoComplete="name"
                   value={contact.name}
                   onChange={(event) => updateContact('name', event.target.value)}
                   placeholder="Ваше имя"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'quiz-name-error' : undefined}
                 />
+                {errors.name && <span className="field-message" id="quiz-name-error">{errors.name}</span>}
               </label>
-              <label className={phoneClass} key={`phone-${validationAttempt}`}>
+              <label className={phoneClass} htmlFor="quiz-phone" key={`phone-${validationAttempt}`}>
                 Телефон
                 <input
+                  id="quiz-phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   value={contact.phone}
                   onChange={(event) => updateContact('phone', event.target.value)}
-                  placeholder="+7"
+                  placeholder="+7 999 000-00-00"
+                  aria-invalid={Boolean(errors.phone)}
+                  aria-describedby={errors.phone ? 'quiz-phone-error' : undefined}
                 />
+                {errors.phone && <span className="field-message" id="quiz-phone-error">{errors.phone}</span>}
               </label>
-              <label>
+              <label htmlFor="quiz-comment">
                 Комментарий, если хотите
                 <textarea
+                  id="quiz-comment"
+                  name="comment"
                   value={contact.comment}
                   onChange={(event) => updateContact('comment', event.target.value)}
                   placeholder="Например: хочу баню с террасой, санузлом и комнатой отдыха"
@@ -151,12 +165,16 @@ export default function ChatQuiz() {
                   type="checkbox"
                   checked={contact.consent}
                   onChange={(event) => updateContact('consent', event.target.checked)}
+                  aria-invalid={Boolean(errors.consent)}
+                  aria-describedby={errors.consent ? 'quiz-consent-error' : undefined}
                 />
                 <span>
                   Я согласен на обработку и хранение персональных данных.{' '}
-                  <a href="#personal-data-consent">Открыть согласие на обработку персональных данных</a>.
+                  <a href="#personal-data-consent" target="_blank" rel="noreferrer">Открыть согласие на обработку персональных данных</a>.
+                  {errors.consent && <span className="field-message" id="quiz-consent-error">{errors.consent}</span>}
                 </span>
               </label>
+              {submissionError && <p className="form-status-error" role="alert">{submissionError}</p>}
               <div className="quiz-actions">
                 <button className="button button-ghost" type="button" onClick={goBack}>Назад</button>
                 <button className="button button-primary" type="submit" disabled={isSending}>

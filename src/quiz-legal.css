@@ -8,6 +8,27 @@
   box-shadow: 0 0 0 4px rgba(201, 75, 63, 0.12);
 }
 
+.field-message {
+  display: block;
+  margin-top: 7px;
+  color: #a9362d;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.form-status-error {
+  margin: 14px 0 0;
+  padding: 13px 15px;
+  border: 1px solid rgba(169, 54, 45, 0.28);
+  border-radius: 14px;
+  color: #862d26;
+  background: rgba(201, 75, 63, 0.09);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .consent-check {
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);

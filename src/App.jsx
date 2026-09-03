@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Home from './pages/Home.jsx'
 import Thanks from './pages/Thanks.jsx'
 import LegalPage from './pages/LegalPage.jsx'
 import ArticlePage from './pages/ArticlePage.jsx'
 import SeoLandingPage from './pages/SeoLandingPage.jsx'
 import { getSeoLandingByPath } from './data/seoLandings.js'
+import { reachGoal, trackPageView } from './utils/metrika.js'
 import './quiz-legal.css'
 import './article.css'
 import './article-fixes.css'
@@ -23,6 +24,7 @@ function getArticleSlug(pathname) {
 
 export default function App() {
   const [route, setRoute] = useState(getRoute)
+  const isFirstPageView = useRef(true)
   const articleSlug = getArticleSlug(route.pathname)
   const landing = getSeoLandingByPath(route.pathname)
   const hash = route.hash
@@ -36,6 +38,34 @@ export default function App() {
       window.removeEventListener('popstate', handleRouteChange)
     }
   }, [])
+
+  useEffect(() => {
+    const handleTrackedClick = (event) => {
+      const link = event.target.closest('a')
+      if (!link) return
+
+      const href = link.getAttribute('href') || ''
+      if (/(^|\/)#(quiz|feedback)$/.test(href)) {
+        reachGoal('click_calculate')
+      }
+
+      if (/(^|\/)#layouts$/.test(href)) {
+        reachGoal('click_layouts')
+      }
+    }
+
+    document.addEventListener('click', handleTrackedClick)
+    return () => document.removeEventListener('click', handleTrackedClick)
+  }, [])
+
+  useEffect(() => {
+    if (isFirstPageView.current) {
+      isFirstPageView.current = false
+      return
+    }
+
+    trackPageView(window.location.href)
+  }, [route.pathname, route.hash])
 
   useEffect(() => {
     window.setTimeout(() => {

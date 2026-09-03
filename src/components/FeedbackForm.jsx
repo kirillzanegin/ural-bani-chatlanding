@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { sendLeadToWebhook } from '../utils/leadWebhook.js'
+import { validateLeadContact } from '../utils/formValidation.js'
 
 export default function FeedbackForm() {
   const [contact, setContact] = useState({ name: '', phone: '', comment: '', consent: false })
@@ -7,9 +8,11 @@ export default function FeedbackForm() {
   const [validationAttempt, setValidationAttempt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [isSending, setIsSending] = useState(false)
+  const [submissionError, setSubmissionError] = useState('')
 
   function updateContact(field, value) {
     setContact({ ...contact, [field]: value })
+    setSubmissionError('')
 
     if (errors[field]) {
       setErrors({ ...errors, [field]: false })
@@ -19,11 +22,7 @@ export default function FeedbackForm() {
   async function submitForm(event) {
     event.preventDefault()
 
-    const nextErrors = {
-      name: !contact.name.trim(),
-      phone: !contact.phone.trim(),
-      consent: !contact.consent,
-    }
+    const nextErrors = validateLeadContact(contact)
 
     setErrors(nextErrors)
 
@@ -32,10 +31,16 @@ export default function FeedbackForm() {
       return
     }
 
-    setIsSending(true)
-    await sendLeadToWebhook({ formSource: 'Нижняя форма', contact })
-    setIsSending(false)
-    setSubmitted(true)
+    try {
+      setIsSending(true)
+      await sendLeadToWebhook({ formSource: 'Нижняя форма', contact })
+      setSubmitted(true)
+    } catch (error) {
+      console.error('Lead sending error:', error)
+      setSubmissionError('Не удалось отправить заявку. Проверьте подключение к интернету и попробуйте ещё раз.')
+    } finally {
+      setIsSending(false)
+    }
   }
 
   const nameClass = errors.name ? 'field-error invalid-shake' : ''
@@ -55,32 +60,48 @@ export default function FeedbackForm() {
 
         <div className="quiz-card feedback-card">
           {submitted ? (
-            <div>
+            <div role="status">
               <h3>Заявка отправлена</h3>
               <p>Спасибо. Менеджер свяжется с вами и уточнит детали.</p>
             </div>
           ) : (
             <form onSubmit={submitForm} noValidate>
               <h3>Связаться с менеджером</h3>
-              <label className={nameClass} key={`feedback-name-${validationAttempt}`}>
+              <label className={nameClass} htmlFor="feedback-name" key={`feedback-name-${validationAttempt}`}>
                 Имя
                 <input
+                  id="feedback-name"
+                  name="name"
+                  autoComplete="name"
                   value={contact.name}
                   onChange={(event) => updateContact('name', event.target.value)}
                   placeholder="Ваше имя"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'feedback-name-error' : undefined}
                 />
+                {errors.name && <span className="field-message" id="feedback-name-error">{errors.name}</span>}
               </label>
-              <label className={phoneClass} key={`feedback-phone-${validationAttempt}`}>
+              <label className={phoneClass} htmlFor="feedback-phone" key={`feedback-phone-${validationAttempt}`}>
                 Телефон
                 <input
+                  id="feedback-phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   value={contact.phone}
                   onChange={(event) => updateContact('phone', event.target.value)}
-                  placeholder="+7"
+                  placeholder="+7 999 000-00-00"
+                  aria-invalid={Boolean(errors.phone)}
+                  aria-describedby={errors.phone ? 'feedback-phone-error' : undefined}
                 />
+                {errors.phone && <span className="field-message" id="feedback-phone-error">{errors.phone}</span>}
               </label>
-              <label>
+              <label htmlFor="feedback-comment">
                 Комментарий, если хотите
                 <textarea
+                  id="feedback-comment"
+                  name="comment"
                   value={contact.comment}
                   onChange={(event) => updateContact('comment', event.target.value)}
                   placeholder="Например: хочу обсудить баню 30 м² с террасой"
@@ -91,12 +112,16 @@ export default function FeedbackForm() {
                   type="checkbox"
                   checked={contact.consent}
                   onChange={(event) => updateContact('consent', event.target.checked)}
+                  aria-invalid={Boolean(errors.consent)}
+                  aria-describedby={errors.consent ? 'feedback-consent-error' : undefined}
                 />
                 <span>
                   Я согласен на обработку и хранение персональных данных.{' '}
-                  <a href="#personal-data-consent">Открыть согласие на обработку персональных данных</a>.
+                  <a href="#personal-data-consent" target="_blank" rel="noreferrer">Открыть согласие на обработку персональных данных</a>.
+                  {errors.consent && <span className="field-message" id="feedback-consent-error">{errors.consent}</span>}
                 </span>
               </label>
+              {submissionError && <p className="form-status-error" role="alert">{submissionError}</p>}
               <div className="quiz-actions">
                 <button className="button button-primary" type="submit" disabled={isSending}>
                   {isSending ? 'Отправляем...' : 'Отправить'}
