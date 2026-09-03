@@ -77,6 +77,23 @@ textarea {
   font-size: 14px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.header-phone {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.header-phone:hover {
+  color: var(--copper);
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -620,7 +637,7 @@ textarea {
 
 .footer-main {
   display: grid;
-  grid-template-columns: minmax(240px, 1.25fr) repeat(2, minmax(190px, 1fr));
+  grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(150px, 1fr));
   align-items: start;
   gap: 36px;
 }
@@ -646,6 +663,12 @@ textarea {
 
 .footer-links a:hover {
   color: var(--white);
+}
+
+.footer-links .footer-phone {
+  color: var(--white);
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .footer-useful {
@@ -745,6 +768,14 @@ textarea {
     padding: 0 14px;
   }
 
+  .header-actions {
+    gap: 9px;
+  }
+
+  .header-phone {
+    font-size: 12px;
+  }
+
   .hero {
     min-height: auto;
   }
@@ -781,6 +812,10 @@ textarea {
     width: 100%;
   }
 
+  .header .button {
+    width: auto;
+  }
+
   .section {
     padding: 64px 0;
   }
@@ -805,5 +840,15 @@ textarea {
   .knowledge-card,
   .quiz-card {
     border-radius: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header .button-small {
+    display: none;
+  }
+
+  .header-phone {
+    font-size: 13px;
   }
 }

@@ -1,3 +1,5 @@
+import { contactPhone } from '../data/contacts.js'
+
 export default function Thanks() {
   return (
     <main className="thanks-page">
@@ -7,9 +9,10 @@ export default function Thanks() {
         <p>
           Мы свяжемся с вами, чтобы уточнить площадь, помещения, комплектацию и особенности проекта.
         </p>
-        <a className="button button-primary" href="./">
-          Вернуться на главную
-        </a>
+        <div className="thanks-actions">
+          <a className="button button-primary" href="./">Вернуться на главную</a>
+          <a className="thanks-phone" href={contactPhone.href}>Позвонить: {contactPhone.display}</a>
+        </div>
       </section>
     </main>
   )

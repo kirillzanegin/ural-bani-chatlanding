@@ -52,6 +52,10 @@ export default function App() {
       if (/(^|\/)#layouts$/.test(href)) {
         reachGoal('click_layouts')
       }
+
+      if (href.startsWith('tel:')) {
+        reachGoal('click_phone')
+      }
     }
 
     document.addEventListener('click', handleTrackedClick)

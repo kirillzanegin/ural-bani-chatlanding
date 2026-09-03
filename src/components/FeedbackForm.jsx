@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { sendLeadToWebhook } from '../utils/leadWebhook.js'
 import { validateLeadContact } from '../utils/formValidation.js'
+import { contactPhone } from '../data/contacts.js'
 
 export default function FeedbackForm() {
   const [contact, setContact] = useState({ name: '', phone: '', comment: '', consent: false })
@@ -121,7 +122,12 @@ export default function FeedbackForm() {
                   {errors.consent && <span className="field-message" id="feedback-consent-error">{errors.consent}</span>}
                 </span>
               </label>
-              {submissionError && <p className="form-status-error" role="alert">{submissionError}</p>}
+              {submissionError && (
+                <p className="form-status-error" role="alert">
+                  {submissionError}{' '}
+                  Можно позвонить: <a href={contactPhone.href}>{contactPhone.display}</a>.
+                </p>
+              )}
               <div className="quiz-actions">
                 <button className="button button-primary" type="submit" disabled={isSending}>
                   {isSending ? 'Отправляем...' : 'Отправить'}

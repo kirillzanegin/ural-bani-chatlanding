@@ -1,3 +1,5 @@
+import { contactPhone } from '../data/contacts.js'
+
 export default function Header({ legal = false }) {
   return (
     <header className={legal ? 'header header-legal' : 'header'}>
@@ -14,7 +16,12 @@ export default function Header({ legal = false }) {
         <a href="/#knowledge">База знаний</a>
         <a href="/#faq">FAQ</a>
       </nav>
-      <a className="button button-small" href="/#quiz">Рассчитать</a>
+      <div className="header-actions">
+        <a className="header-phone" href={contactPhone.href} aria-label={`Позвонить по номеру ${contactPhone.display}`}>
+          {contactPhone.display}
+        </a>
+        <a className="button button-small" href="/#quiz">Рассчитать</a>
+      </div>
     </header>
   )
 }

@@ -1,4 +1,5 @@
 import Header from '../components/Header.jsx'
+import { contactPhone } from '../data/contacts.js'
 
 const documents = {
   privacy: {
@@ -163,6 +164,10 @@ export default function LegalPage({ type }) {
               {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </section>
           ))}
+          <section className="legal-contact">
+            <h2>Контакт для обращений</h2>
+            <p>Телефон: <a href={contactPhone.href}>{contactPhone.display}</a></p>
+          </section>
           <div className="legal-links">
             <a href="#privacy">Политика обработки персональных данных</a>
             <a href="#personal-data-consent">Согласие на обработку персональных данных</a>

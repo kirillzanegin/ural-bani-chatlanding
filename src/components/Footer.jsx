@@ -1,3 +1,5 @@
+import { contactPhone } from '../data/contacts.js'
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -20,6 +22,12 @@ export default function Footer() {
           <a href="#privacy">Политика обработки персональных данных</a>
           <a href="#personal-data-consent">Согласие на обработку персональных данных</a>
           <a href="#cookies">Политика использования cookies</a>
+        </nav>
+
+        <nav className="footer-links" aria-label="Контакты">
+          <strong>Контакты</strong>
+          <a className="footer-phone" href={contactPhone.href}>{contactPhone.display}</a>
+          <a href="/#feedback">Оставить заявку</a>
         </nav>
       </div>
 

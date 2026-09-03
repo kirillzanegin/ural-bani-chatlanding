@@ -10,6 +10,7 @@ import { knowledgeItems } from '../src/data/knowledge.js'
 import { seoLandings } from '../src/data/seoLandings.js'
 import { faqItems } from '../src/data/faq.js'
 import { getLandingEnhancement } from '../src/data/landingEnhancements.js'
+import { contactPhone } from '../src/data/contacts.js'
 
 const SITE_URL = 'https://бани-урала.рф'
 const BUILD_DATE = '2026-06-28'
@@ -90,7 +91,7 @@ function renderArticleShell(article) {
     headline: article.title,
     description,
     author: { '@type': 'Organization', name: 'Бани Урала' },
-    publisher: { '@type': 'Organization', name: 'Бани Урала', url: SITE_URL },
+    publisher: { '@type': 'Organization', name: 'Бани Урала', url: SITE_URL, telephone: contactPhone.e164 },
     mainEntityOfPage: canonical,
     dateModified: BUILD_DATE,
     inLanguage: 'ru-RU',
@@ -114,7 +115,7 @@ function renderLandingShell(landing) {
     '@type': 'Service',
     name: landing.title,
     description: landing.description,
-    provider: { '@type': 'Organization', name: 'Бани Урала', url: SITE_URL },
+    provider: { '@type': 'Organization', name: 'Бани Урала', url: SITE_URL, telephone: contactPhone.e164 },
     areaServed: ['Свердловская область', 'Курганская область', 'Тюменская область', 'Челябинская область'],
     serviceType: 'Строительство бань под ключ',
   }
