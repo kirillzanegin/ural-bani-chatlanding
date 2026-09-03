@@ -1,4 +1,5 @@
 import { reachGoal } from './metrika.js'
+import { reachMailruGoal } from './mailru.js'
 
 const LEAD_WEBHOOK_URL = 'https://zeehost.ru/webhook/bani_urala'
 const UTM_STORAGE_KEY = 'bani_urala_utm'
@@ -35,6 +36,7 @@ function normalizeList(value, customValue = '') {
 
 function trackLeadGoals(formSource) {
   reachGoal('lead_submit')
+  reachMailruGoal('lead_submit')
 
   if (formSource === 'Чат-опрос') {
     reachGoal('quiz_submit')
